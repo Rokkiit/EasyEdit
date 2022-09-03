@@ -1,9 +1,15 @@
 {
-  "name": "platz1de/easyedit",
+  "name": "rokkiit/easyedit",
+  "description": "Forked from platz1de/EasyEdit",
+  "type": "library",
+  "license": "GPL-3.0-only",
   "autoload": {
     "psr-4": {
       "": "src"
     }
+  },
+  "require-dev": {
+    "pocketmine/pocketmine-mp": "4.6.0"
   },
   "scripts": {
     "build": "php -dphar.readonly=0 build/ConsoleScript.php --make plugin.yml,resources,src --relative \"./\" --name EasyEdit"
