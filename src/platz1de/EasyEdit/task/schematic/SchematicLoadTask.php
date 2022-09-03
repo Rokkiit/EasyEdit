@@ -18,16 +18,18 @@ use pocketmine\math\Vector3;
 class SchematicLoadTask extends ExecutableTask
 {
 	private string $schematicPath;
+    private bool $skipAir;
 
 	/**
 	 * @param string $owner
 	 * @param string $schematicPath
 	 * @return SchematicLoadTask
 	 */
-	public static function from(string $owner, string $schematicPath): SchematicLoadTask
+	public static function from(string $owner, string $schematicPath, bool $skipAir = false): SchematicLoadTask
 	{
 		$instance = new self($owner);
 		$instance->schematicPath = $schematicPath;
+        $instance->skipAir = $skipAir;
 		return $instance;
 	}
 
@@ -35,9 +37,9 @@ class SchematicLoadTask extends ExecutableTask
 	 * @param string $player
 	 * @param string $schematicName
 	 */
-	public static function queue(string $player, string $schematicName): void
+	public static function queue(string $player, string $schematicName, bool $skipAir = false): void
 	{
-		TaskInputData::fromTask(self::from($player, EasyEdit::getSchematicPath() . $schematicName));
+		TaskInputData::fromTask(self::from($player, EasyEdit::getSchematicPath() . $schematicName, $skipAir));
 	}
 
 	/**
@@ -52,7 +54,7 @@ class SchematicLoadTask extends ExecutableTask
 	{
 		$start = microtime(true);
 		$selection = new DynamicBlockListSelection($this->getOwner(), Vector3::zero(), Vector3::zero());
-		SchematicFileAdapter::readIntoSelection($this->schematicPath, $selection);
+		SchematicFileAdapter::readIntoSelection($this->schematicPath, $selection, $this->skipAir);
 		StorageModule::collect($selection);
 		$changeId = StorageModule::finishCollecting();
 		ClipboardCacheData::from($this->getOwner(), $changeId);

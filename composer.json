@@ -1,0 +1,16 @@
+{
+  "name": "platz1de/easyedit",
+  "autoload": {
+    "psr-4": {
+      "": "src"
+    }
+  },
+  "scripts": {
+    "build": "php -dphar.readonly=0 build/ConsoleScript.php --make plugin.yml,resources,src --relative \"./\" --name EasyEdit"
+  },
+  "config": {
+    "allow-plugins": {
+      "phpstan/extension-installer": true
+    }
+  }
+}

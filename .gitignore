@@ -1,0 +1,10 @@
+META-INF
+out
+target
+.idea/*
+vendor/*
+composer.lock
+*.iml
+*.jar
+EasyEdit.phar
+.php-cs-fixer.cache

@@ -35,7 +35,7 @@ class SpongeSchematic extends SchematicType
 	public const ENTITY_ID = "Id"; //also used for tile entities
 	public const ENTITY_EXTRA_DATA = "Data"; //also used for tile entities
 
-	public static function readIntoSelection(CompoundTag $nbt, DynamicBlockListSelection $target): void
+	public static function readIntoSelection(CompoundTag $nbt, DynamicBlockListSelection $target, bool $skipAir = false): void
 	{
 		if (!BlockStateConvertor::isAvailable()) {
 			throw new InternetException("Couldn't load needed data files");
@@ -103,7 +103,7 @@ class SpongeSchematic extends SchematicType
 		for ($y = 0; $y < $ySize; ++$y) {
 			for ($z = 0; $z < $zSize; ++$z) {
 				for ($x = 0; $x < $xSize; ++$x) {
-					$target->addBlock($x, $y, $z, $palette[$i = $blockData->getUnsignedVarInt()] ?? 0);
+					$target->addBlock($x, $y, $z, $palette[$i = $blockData->getUnsignedVarInt()] ?? 0, $skipAir);
 
 					if (isset($tileData[World::blockHash($x, $y, $z)])) {
 						TileConvertor::toBedrock($tileData[World::blockHash($x, $y, $z)], $target, $tilePalette[$i] ?? null);

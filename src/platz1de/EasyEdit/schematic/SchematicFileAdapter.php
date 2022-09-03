@@ -23,7 +23,7 @@ class SchematicFileAdapter
 		".schem" => SpongeSchematic::class
 	];
 
-	public static function readIntoSelection(string $path, DynamicBlockListSelection $target): void
+	public static function readIntoSelection(string $path, DynamicBlockListSelection $target, bool $skipAir = false): void
 	{
 		$file = null;
 		$usedParser = null;
@@ -41,7 +41,7 @@ class SchematicFileAdapter
 		$nbtParser = new BigEndianNbtSerializer();
 		$nbt = $nbtParser->read($file)->mustGetCompoundTag();
 
-		$usedParser::readIntoSelection($nbt, $target);
+		$usedParser::readIntoSelection($nbt, $target, $skipAir);
 	}
 
 	public static function createFromSelection(string $path, DynamicBlockListSelection $target): void
