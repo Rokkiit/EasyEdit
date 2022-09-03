@@ -69,10 +69,12 @@ class SchematicLoadTask extends ExecutableTask
 	public function putData(ExtendedBinaryStream $stream): void
 	{
 		$stream->putString($this->schematicPath);
+        $stream->putString($this->skipAir);
 	}
 
 	public function parseData(ExtendedBinaryStream $stream): void
 	{
 		$this->schematicPath = $stream->getString();
+        $this->skipAir = $stream->getBoolean();
 	}
 }

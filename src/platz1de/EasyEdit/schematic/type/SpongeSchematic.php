@@ -103,7 +103,11 @@ class SpongeSchematic extends SchematicType
 		for ($y = 0; $y < $ySize; ++$y) {
 			for ($z = 0; $z < $zSize; ++$z) {
 				for ($x = 0; $x < $xSize; ++$x) {
-					$target->addBlock($x, $y, $z, $palette[$i = $blockData->getUnsignedVarInt()] ?? 0, $skipAir);
+                    $id = $palette[$i = $blockData->getUnsignedVarInt()] ?? 0;
+                    if ($id === 0 && $skipAir) {
+                        continue;
+                    }
+					$target->addBlock($x, $y, $z, $id, $skipAir);
 
 					if (isset($tileData[World::blockHash($x, $y, $z)])) {
 						TileConvertor::toBedrock($tileData[World::blockHash($x, $y, $z)], $target, $tilePalette[$i] ?? null);

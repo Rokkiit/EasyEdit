@@ -26,7 +26,13 @@ class ExtendedBinaryStream extends BinaryStream
 	{
 		return $this->get($this->getInt());
 	}
-
+    /**
+     * @return bool
+     */
+    public function getBoolean(): string
+    {
+        return $this->get($this->getInt());
+    }
 	/**
 	 * @param Vector3 $vector
 	 */

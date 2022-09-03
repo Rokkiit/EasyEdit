@@ -53,7 +53,7 @@ abstract class ChunkManagedBlockList extends BlockListSelection
 	 */
 	public function addBlock(int $x, int $y, int $z, int $id, bool $overwrite = true, bool $skipAir = false): void
 	{
-		if ($id === 0xD90 || ($id === 0 && $skipAir)) {
+		if ($id === 0xD90) {
 			return;
 		}
 		if ($id === 0) {
